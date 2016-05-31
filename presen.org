@@ -1,4 +1,4 @@
-#+title: Yet Another Org-mode Presentation Script
+#+title: Evaluation of a Simple, Window-based, Replanning Approach to Plan Optimization
 #+author: Masataro Asai
 #+include: "head.org"
 #+LINK: img file:img/%s
@@ -6,303 +6,309 @@
 #+LINK: jpg file:img/%s.jpg
 
 #+BEGIN_outline-text-1
-#+BEGIN_XLARGE
 #+BEGIN_CENTER
-To Start Press "n"
-#+END_CENTER
-#+END_XLARGE
+Shoma Endo, _Masataro Asai_, Alex Fukunaga
 
-#+BEGIN_CENTER
-*WARN* Turn off your custom keyboard shortcuts
+University of Tokyo
 #+END_CENTER
-
-#+BEGIN_NOTE
-#+BEGIN_ALIGNRIGHT
-Made by guicho2.71828 (Masataro Asai)
-#+END_ALIGNRIGHT
-#+END_NOTE
 #+END_outline-text-1
 
-* What Is It?
+* Satisficing Planning + Online Cost Refinements
+
+[[png:anytime1]]
+
+* Satisficing Planning + Algorithm Switch
+
+[[png:anytime2]]
+
+#+BEGIN_ALIGNRIGHT
++ *Major example: Plan Postprocessing*
+#+END_ALIGNRIGHT
+
+* Main Topic of the paper: Plan Postprocessing
+
+[[png:framework]]
+
+* Various Postprocessing Systems
+
++ Aras (Nakhost and Muller 2010)
+  + Action Elimination(*AE*)
+  + Plan Neighborhood Graph Search(*PNGS*)
++ Action Dependency (*AD*) (Chrpa, McCluskey and Osborne 2012)
++ Block Deordering (BDPO2) (Siddiqui and Haslum 2013;2015)
++ Anytime Iterative Refinement of Solution (*AIRS*) (Estrem and Krebsbach 2012)
+
+* Two groups of Optimization Algorithms
+
+| <c>                      |   | <c>                    |
+| Polytime Optimizer       |   | Search-based Optimizer |
+|--------------------------+---+------------------------|
+| Based on the direct      |   | Refining a partial     |
+| analysis of a given plan |   | segment in a plan      |
+|--------------------------+---+------------------------|
+|                          |   |                        |
+|                          |   |                        |
+|                          |   |                        |
+|--------------------------+---+------------------------|
+
+** Polytime Optimizers
+
+[[png:polytime]]
+
+** Polytime Optimizers
+
+[[png:polytime2]]
+
+** Two groups of Optimization Algorithms
+
+| <c>                      |   | <c>                    |
+| Polytime Optimizer       |   | Search-based Optimizer |
+|--------------------------+---+------------------------|
+| Based on the direct      |   | Refining a partial     |
+| analysis of a given plan |   | segment in a plan      |
+|--------------------------+---+------------------------|
+| *AE : O(n^2)*            |   |                        |
+| *AD : O(n^2)*            |   |                        |
+| n: plan length           |   |                        |
+|--------------------------+---+------------------------|
+
+** Search-based Optimizers
+
+[[png:search-based]]
+
+** Search-based Optimizers
+
+[[png:search-based2]]
+
+** Two groups of Optimization Algorithms
+
+| <c>                      |   | <c>                    |
+| Polytime Optimizer       |   | Search-based Optimizer |
+|--------------------------+---+------------------------|
+| Based on the direct      |   | Refining a partial     |
+| analysis of a given plan |   | segment in a plan      |
+|--------------------------+---+------------------------|
+| AE : O(n^2)              |   | *PNGS*                 |
+| AD : O(n^2)              |   | *AIRS*                 |
+| n: plan length           |   | BDPO2                   |
+|--------------------------+---+------------------------|
+
+** Search-based Optimizers Taxonomy
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN3
+
+[[png:search-based2]]
+
+#+END_SPAN3
+#+BEGIN_SPAN9
+|       | Subproblems are based on        | Subproblems are solved with |
+|-------+---------------------------------+-----------------------------|
+| PNGS  | neighborhood graph              | Blind unit-cost A*          |
+|       |                                 | or Backward Breadths First  |
+| AIRS  | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
+| BDPO2 | windows (block decomposition)   | Admissible A*               |
+|       |                                 | or PNGS (layered approach)  |
+#+END_SPAN9
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+** Window-based optimization
+
+[[png:window]]
+
+* Open Questions
+
+#+BEGIN_LARGER
+*What is the /baseline/ of various search-based optimizers?*
+#+END_LARGER
+
+#+BEGIN_ALIGNRIGHT
+i.e. Are these */complex/* algorithms necessary?
+#+END_ALIGNRIGHT
+
+　
+
+#+BEGIN_LARGER
+*How to /combine/ Polytime and Search-based Optimizers?*
+#+END_LARGER
+
+#+BEGIN_ALIGNRIGHT
+Also, how effective is it to combine them?
+#+END_ALIGNRIGHT
+
+* Differences in Search-based Optimizers ☹
+
+|       | Subproblems are based on          | Subproblems are solved with  |
+|-------+-----------------------------------+------------------------------|
+| PNGS  | *neighborhood graph*              | *Blind* unit-cost A*         |
+|       |                                   | or *Backward Breadths First* |
+| AIRS  | windows *(ordered by Δcost/Δh)* | *Blind Bidirectional*        |
+| BDPO2 | windows *(block deordering)*      | Admissible A*                |
+|       |                                   | or *PNGS* (layered approach) |
+|-------+-----------------------------------+------------------------------|
+|       |                                   |                              |
+
+#+BEGIN_ALIGNRIGHT
+*→ The amount of observation from the experiments are limited*
+#+END_ALIGNRIGHT
+
+* So...
 
 #+BEGIN_XLARGE
-An Alternative to
 #+BEGIN_CENTER
-Org-based Presentation
+"Improvements" MUST outperform the simplest baseline
 #+END_CENTER
-#+BEGIN_ALIGNRIGHT
-Method
-#+END_ALIGNRIGHT
 #+END_XLARGE
 
-#+BEGIN_CENTER
-Proceed with "n"
-#+END_CENTER
+* /Simplest baseline/ of search-based optimizers : */R-WIN/*
 
-* Usage (on browsers)
+|         | Subproblems are based on        | Subproblems are solved with |
+|---------+---------------------------------+-----------------------------|
+| PNGS    | neighborhood graph              | Blind unit-cost A*          |
+|         |                                 | or Backward Breadths First  |
+| AIRS    | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
+| BDPO2   | windows (block deordering)      | Admissible A*               |
+|         |                                 | or PNGS (layered approach)  |
+|---------+---------------------------------+-----------------------------|
+| *R-WIN* | *windows* (*random*)            | *Admissible A**             |
 
-#+BEGIN_SMALLER
+* Evaluate them in an "/Equal Condition/"
 
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-+ n,<Space> :: go to the next slide/expand a list
-+ p :: back to the previous slide
-+ u, ^ :: go to the parent section
-+ N :: expand all list in the current slide
-#+END_SPAN6
-#+BEGIN_SPAN6
-+ s, or typing "go" :: jump to an arbitrary section (using minibuffer)
-+ d :: debugging mode (shows content border)
-+ <Ctrl-g> or <Esc> :: cancel current key strokes
-+ typing "help" :: show available commands in the minibuffer!
-#+END_SPAN6
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
+|         | Subproblems are based on        | Subproblems are solved with |
+|---------+---------------------------------+-----------------------------|
+| PNGS    | neighborhood graph              | *Admissible A**             |
+|         |                                 |                             |
+| AIRS    | windows (ordered by Δcost/Δh) | *Admissible A**             |
+| BDPO2   | windows (block deordering)      | *Admissible A**             |
+|         |                                 |                             |
+|---------+---------------------------------+-----------------------------|
+| *R-WIN* | *windows* (*random*)            | *Admissible A**             |
 
-#+END_SMALLER
-
-* Usage (on emacs)
-
-1. clone [[https://github.com/guicho271828/another-org-info][our repo]]
-
-2. =make html= to publish
-
-3. show it on your browser!
-
-* Virtue
-
-+ Simplicity
-  + =code.js= is a pure javascript, only has 200 lines (increasing as new features
-    are added)
-+ Extensibility
-  + you can write your own extension and its easy
-  + set a function to =keyManager.<your-key-strokes>=
-  + the key strokes should contain character $c$ within char code $32 < c < 126$
-    + =Space,!,",...A,B,C,...x,y,z,{,|,~=
-+ LICENSE
-  + GPLv3 ?? < not attatched a license yet
-
-* Example: Expanding a List
-
-+ *the dots* tell "/this is a content/"
-+ list
-+ list
-* Dependencies
-<<dependency>>
-
-+ jQuery (included)
-+ Inkscape (image conversion)
-+ org-mode (included)
-+ MathJax (optional submodule)
-
-* LaTeX output
-
-+ [[file:presen.pdf][PDF Presentaiton]] presen.pdf -- presentation in pdf with similar
-  appearance. Useful when browser-based presentation is not allowed
-+ [[file:resume.pdf][Printable Resume]] resume.pdf -- short and printed version.
-+ =make pdf= and =make resume= on the shell
-+ need the latest $\mbox{\TeX}$ live installation
-  + see =Makefile=
-  + =platex= and =dvipdfmx=
-  + alternatively, =pdflatex=
-
-* Images
-
-+ Put images into =img/= directory.
-+ svg files are converted into png.
-  + We recommend it because
-    1. In html presentation, the inserted svg images capture the keyboard and mouse event
-       and the presentation sometimes does not work right.
-    2. In resume output and pdf presentation, the =svg= and =svg-inkscape= package is a
-       bit buggy and I personally failed make it work.
-+ svg-png conversion is done by =inkscape=
-  + but you can also use ImageMagick =convert= command.
-  + See =img/Makefile= for more information.
-
-* Org-block templates
-
-We mark the html tag with org-mode blocks such as =#+BEGIN_EXAMPLE=.
-Using [[http://orgmode.org/manual/Easy-Templates.html][block template]] (by modifying =org-structure-template-alist=),
-you can quickly write such blocks i.e.:
-
-#+BEGIN_EXAMPLE
-at the beginning of line, hit
-
-<s<tab>
-
-in normal org-mode destribution in emacs,
-it would expand into:
-
-#+BEGIN_SRC 
-
-#+END_SRC
-#+END_EXAMPLE
-
-** customizing templates
-
-We provide custom =org-structure-template-alist=.
-These blocks are recognized by the stylesheet we provide,
-so they are highlighted correctly.
+* Evaluation
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
-+ <S -- smaller
-+ <lar -- larger
-+ <t -- twocolumn
-+ <n -- footnote
-+ <r -- float right
-+ <ar -- align right
-+ <lcr -- "left,center,right" format with x-large fonts
-+ <E -- latex `equation' environment
-+ still more...
+IPC instances
+
+Optimize the 15 min results of LAMA
+
+Resource 15 min, 2GB
+
+Participants AD, AE, AIRS, PNGS, R-WIN
+
+(BDPO2 is not tested)
 #+END_SPAN6
 #+BEGIN_SPAN6
-copy-paste it
-to your =.emacs=
-
-#+BEGIN_CENTER
-[[file:config.el]]
-#+END_CENTER
-
+|             |            <r> |
+| Algorithm   | Harmonic Means |
+|             |      of Ratios |
+|-------------+----------------|
+| LAMA(15min) |           100% |
+| LAMA(30min) |              % |
+| AE          |              % |
+| AD          |              % |
+| AIRS        |              % |
+| PNGS        |              % |
+| R-WIN       |              % |
 #+END_SPAN6
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-* Utility
+#+BEGIN_ALIGNRIGHT
+　
+#+END_ALIGNRIGHT
 
-+ ./make-periotically.sh [args]
-  + Watches the changes in the directory and =make=
-  + Build statuses are notified in inotify pop-up
-  + all arguments are passed to =make=
-  + dependency : inotifywait, notify-send
-
-* Makefile Targets
-
-+ =make html= -- builds the html version
-+ =make resume= -- builds the resume version
-+ =make pdf= -- builds the pdf version
-+ =make= -- build all
-
-* Test
-
-+ [[http://www.google.com][Link]]
-+ This
-+ Is
-+ A Test
-
-Mathjax formula:
-
-\[
- E=mc^2
-\]
-
-\begin{equation}
- E=mc^2 + \frac{1}{2} mv^2
-\end{equation}
-
-** Twocolumn Test
+* Results
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
-+ HOOA!
-+ *HOOA!*
-+ HOOA!
+IPC instances
+
+Optimize the 15 min results of LAMA
+
+Resource 15 min, 2GB
+
+Participants AD, AE, AIRS, PNGS, R-WIN
+
+(BDPO2 is not tested)
 #+END_SPAN6
 #+BEGIN_SPAN6
-This is a LISP ALIEN IN A CAGE!
-
-[[png:alien]]
-
+| Algorithm   | Harmonic Means |
+|             |      of Ratios |
+|-------------+----------------|
+| LAMA(15min) |           100% |
+| LAMA(30min) |          99.3% |
+| AE          |          98.4% |
+| AD          |          97.4% |
+| AIRS        |          97.9% |
+| PNGS        |          96.0% |
+| R-WIN       |        *95.9%* |
 #+END_SPAN6
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-
-** many columns test
-
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN3
- a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a
-#+END_SPAN3
-#+BEGIN_SPAN3
- b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b
-#+END_SPAN3
-#+BEGIN_SPAN3
- c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c
-#+END_SPAN3
-#+BEGIN_SPAN3
- d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d
-#+END_SPAN3
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
-
-* A Slide with Too Little Contents
-
-#+BEGIN_CENTER
-#+BEGIN_SMALLER
-Hi, I'm small!
-#+END_SMALLER
-#+END_CENTER
+#+BEGIN_ALIGNRIGHT
+*Complex tweaks did not outperform the simplest variant*
+#+END_ALIGNRIGHT
 
 #+BEGIN_NOTE
-See the headline is correctly adjusted
+BDPO2 unconfirmed
 #+END_NOTE
 
-* Left-Center-Right template
+* So...
 
 #+BEGIN_XLARGE
-x-large left
 #+BEGIN_CENTER
-centered
+Now let's reliably improve upon the baseline!
 #+END_CENTER
-#+BEGIN_ALIGNRIGHT
-right
-#+END_ALIGNRIGHT
 #+END_XLARGE
 
-#+BEGIN_NOTE
-This is a footnote
-#+END_NOTE
+* Improve AIRS to outperform R-WIN
 
-* TODOs
+Window priority: Δcost(i,j) / Δh(i,j)
 
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-#+BEGIN_SMALLER
-+ Features
-  + Table of contents
-  + +=<dl>= does not expand+ *DONE*
-  + +Showing current keystrokes+ *DONE*
-  + auto-scroll/auto-zoom with big contents
-  + Showing current/total page number
-  + +Changing Stylesheet+ *DONE*. "style"
-  + +Up-Section command+ *DONE*. "u"
-  + Slide thumbnail
-  + +stopwatch/countdown timer+ *DONE*. "timer"
-  + +link to #section+ *DONE*.
-    #+HTML: <a href="index.html#6">sample link</a>
-#+END_SMALLER
-#+END_SPAN6
-#+BEGIN_SPAN6
-#+BEGIN_SMALLER
-+ Features inspired by other tools
-  + Content Search (in org-infojs)
-  + Drawing mode (in [[http://code.google.com/p/jessyink/][jessyink]])
-  + 'Paused' mode (in [[http://lab.hakim.se/reveal-js/][reveal.js]])
-  + +Export to PDF (also in reveal.js)+ *DONE*
-  + +resume output+ *DONE*
-  + Slide with an image covering the entire background (slideshare)
-  + present one paragraph/word/letter at a time
-    + those in [[http://docutils.sourceforge.net/docs/user/slide-shows.s5.html][s5]]
-  + "C-M-x" style notation in the command definition
-#+END_SMALLER
-#+END_SPAN6
+[[png:airs]]
 
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
+* Improve AIRS to outperform R-WIN
+
+Why we chose AIRS:
+
+#+BEGIN_ALIGNRIGHT
+→ Easy to implement, minimum diff from R-WIN
+#+END_ALIGNRIGHT
+
+Problem in AIRS:
+
+#+BEGIN_ALIGNRIGHT
+Original AIRS is tested only on *small-scale 15-puzzle/grid-pathfinding*
+
+*＜ 0.1 sec replanning time*
+#+END_ALIGNRIGHT
+
+* Penalizing the overwrapping region (Original AIRS)
+
+
+
+
+* Few improvements
+
+
+
+* Multiple Optimizers
+
+[[png:framework2]]
+
+** Multiple Optimizers
+
+[[png:framework3]]
+
+** Interactions between Polytime and Search-based Optimizers
+
+[[png:framework4]]
+
+
+
