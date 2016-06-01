@@ -105,6 +105,31 @@ University of Tokyo
 #+BEGIN_SPAN9
 |       | Subproblems are based on        | Subproblems are solved with |
 |-------+---------------------------------+-----------------------------|
+| PNGS  | neighborhood graph              |                             |
+|       |                                 |                             |
+| AIRS  | windows (ordered by Δcost/Δh) |                             |
+| BDPO2 | windows (block decomposition)   |                             |
+|       |                                 |                             |
+#+END_SPAN9
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+** Window-based optimization
+
+[[png:window]]
+
+** Search-based Optimizers Taxonomy
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN3
+
+[[png:search-based2]]
+
+#+END_SPAN3
+#+BEGIN_SPAN9
+|       | Subproblems are based on        | Subproblems are solved with |
+|-------+---------------------------------+-----------------------------|
 | PNGS  | neighborhood graph              | Blind unit-cost A*          |
 |       |                                 | or Backward Breadths First  |
 | AIRS  | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
@@ -114,9 +139,6 @@ University of Tokyo
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
-** Window-based optimization
-
-[[png:window]]
 
 * Open Questions
 
@@ -138,7 +160,17 @@ i.e. Are these */complex/* algorithms necessary?
 Also, how effective is it to combine them?
 #+END_ALIGNRIGHT
 
-* Differences in Search-based Optimizers ☹
+#+BEGIN_NOTE
+In this paper, we answer the following two open questions.
+
+the first one is, ...
+
+the second one is...
+
+now lets start discussing the first one.
+#+END_NOTE
+
+* Various Minor Differences in Search-based Optimizers ☹
 
 |       | Subproblems are based on          | Subproblems are solved with  |
 |-------+-----------------------------------+------------------------------|
@@ -154,14 +186,6 @@ Also, how effective is it to combine them?
 *→ The amount of observation from the experiments are limited*
 #+END_ALIGNRIGHT
 
-* So...
-
-#+BEGIN_XLARGE
-#+BEGIN_CENTER
-"Improvements" MUST outperform the simplest baseline
-#+END_CENTER
-#+END_XLARGE
-
 * /Simplest baseline/ of search-based optimizers : */R-WIN/*
 
 |         | Subproblems are based on        | Subproblems are solved with |
@@ -172,19 +196,19 @@ Also, how effective is it to combine them?
 | BDPO2   | windows (block deordering)      | Admissible A*               |
 |         |                                 | or PNGS (layered approach)  |
 |---------+---------------------------------+-----------------------------|
-| *R-WIN* | *windows* (*random*)            | *Admissible A**             |
+| *R-WIN* | *windows* (*random*)            | *Admissible A^＊ + LMcut*   |
 
 * Evaluate them in an "/Equal Condition/"
 
 |         | Subproblems are based on        | Subproblems are solved with |
 |---------+---------------------------------+-----------------------------|
-| PNGS    | neighborhood graph              | *Admissible A**             |
+| PNGS    | neighborhood graph              | *Admissible A^＊ + LMcut*   |
 |         |                                 |                             |
-| AIRS    | windows (ordered by Δcost/Δh) | *Admissible A**             |
-| BDPO2   | windows (block deordering)      | *Admissible A**             |
+| AIRS    | windows (ordered by Δcost/Δh) | *Admissible A^＊ + LMcut*   |
+| BDPO2   | windows (block deordering)      | *Admissible A^＊ + LMcut*   |
 |         |                                 |                             |
 |---------+---------------------------------+-----------------------------|
-| *R-WIN* | *windows* (*random*)            | *Admissible A**             |
+| *R-WIN* | *windows* (*random*)            | *Admissible A^＊ + LMcut*   |
 
 * Evaluation
 
@@ -259,11 +283,19 @@ Participants AD, AE, AIRS, PNGS, R-WIN
 BDPO2 unconfirmed
 #+END_NOTE
 
-* So...
+* 
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
-Now let's reliably improve upon the baseline!
+"Improvements" should outperform the simplest baseline ☹
+#+END_CENTER
+#+END_XLARGE
+
+* 
+
+#+BEGIN_XLARGE
+#+BEGIN_CENTER
+Now let's reliably improve upon the baseline ☺
 #+END_CENTER
 #+END_XLARGE
 
@@ -289,13 +321,67 @@ Original AIRS is tested only on *small-scale 15-puzzle/grid-pathfinding*
 *＜ 0.1 sec replanning time*
 #+END_ALIGNRIGHT
 
-* Penalizing the overwrapping region (Original AIRS)
+* Pitfall 1
+
+[[png:binary-search]]
+
+** Pitfall 1
+
+[[png:binary-search2]]
+
+* Pitfall 2
+
+[[png:penalty]]
 
 
+* Result
 
+| Algorithm         | Harmonic Means |
+|                   |      of Ratios |
+|-------------------+----------------|
+| LAMA(15min)       |           100% |
+| LAMA(30min)       |          99.3% |
+| AE                |          98.4% |
+| AD                |          97.4% |
+| AIRS              |          97.9% |
+| PNGS              |          96.0% |
+| R-WIN             |          95.9% |
+|-------------------+----------------|
+| CH-WIN (proposed) |        *93.3%* |
 
-* Few improvements
+#+BEGIN_ALIGNRIGHT
+*best performance*
+#+END_ALIGNRIGHT
 
+* Open Questions
+
+#+BEGIN_LARGER
++What is the /baseline/ of various search-based optimizers?+
+#+END_LARGER
+
+#+BEGIN_ALIGNRIGHT
++i.e. Are these */complex/* algorithms necessary?+
+#+END_ALIGNRIGHT
+
+　
+
+#+BEGIN_LARGER
+*How to /combine/ Polytime and Search-based Optimizers?*
+#+END_LARGER
+
+#+BEGIN_ALIGNRIGHT
+Also, how effective is it to combine them?
+#+END_ALIGNRIGHT
+
+#+BEGIN_NOTE
+In this paper, we answer the following two open questions.
+
+the first one is, ...
+
+the second one is...
+
+now lets start discussing the first one.
+#+END_NOTE
 
 
 * Multiple Optimizers
@@ -306,9 +392,39 @@ Original AIRS is tested only on *small-scale 15-puzzle/grid-pathfinding*
 
 [[png:framework3]]
 
-** Interactions between Polytime and Search-based Optimizers
+** Polytime + Search-based Optimizers
 
 [[png:framework4]]
 
+** Easier Done than Said...
 
+[[png:static/poly]]
+
+#+BEGIN_ALIGNRIGHT
++ Iterating AE and AD is not effective
++ we can apply them at most once
+#+END_ALIGNRIGHT
+
+* Polytime + Search-based Result
+
+|                   |      <r> |       <r> |
+| Algorithm         |          |           |
+| X                 | $x$ only | AE+AD+$x$ |
+|-------------------+----------+-----------|
+| LAMA(15min)       |     100% |         - |
+| LAMA(30min)       |    99.3% |         - |
+| AE                |    98.4% |           |
+| AD                |    97.4% |           |
+| AIRS              |    97.9% |     95.6% |
+| PNGS              |    96.0% |     94.4% |
+| R-WIN             |    95.9% |     94.0% |
+|-------------------+----------+-----------|
+| CH-WIN (proposed) |    93.3% |   *91.8%* |
+
+* Lessons Learned
+
++ Avoid premature optimization
++ Use the simplest variant as a baseline, improve upon it
++ CH-WIN, improved AIRS variant
++ Reconfirmed poly+search effectiveness
 
