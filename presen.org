@@ -13,6 +13,10 @@ University of Tokyo
 #+END_CENTER
 #+END_outline-text-1
 
+CH-WIN の名前を出す
+
+
+
 * Satisficing Planning + Online Cost Refinements
 
 [[png:anytime1]]
@@ -29,12 +33,15 @@ University of Tokyo
 
 [[png:framework]]
 
-* Various Postprocessing Systems
+total 30 min
+15 min + 15 min
+
+* TODO Various Postprocessing Systems
 
 + Aras (Nakhost and Muller 2010)
-  + Action Elimination(*AE*)
+  + Action Elimination(*AE*) --- remove unnecessary 
   + Plan Neighborhood Graph Search(*PNGS*)
-+ Action Dependency (*AD*) (Chrpa, McCluskey and Osborne 2012)
++ Action Dependency (*AD*) (Chrpa, McCluskey and Osborne 2012) --- bra bra bra
 + Block Deordering (BDPO2) (Siddiqui and Haslum 2013;2015)
 + Anytime Iterative Refinement of Solution (*AIRS*) (Estrem and Krebsbach 2012)
 
@@ -305,6 +312,8 @@ Window priority: Δcost(i,j) / Δh(i,j)
 
 [[png:airs]]
 
+ここと pitfall 1 とのつながりが弱い
+
 * Improve AIRS to outperform R-WIN
 
 Why we chose AIRS:
@@ -325,7 +334,10 @@ Original AIRS is tested only on *small-scale 15-puzzle/grid-pathfinding*
 
 [[png:binary-search]]
 
-** Pitfall 1
+割り算どうのは話さなくてもいい
+どのみち良くする
+
+** AIRS Pitfall 1
 
 [[png:binary-search2]]
 
@@ -333,6 +345,11 @@ Original AIRS is tested only on *small-scale 15-puzzle/grid-pathfinding*
 
 [[png:penalty]]
 
+CH-WIN removes penalty
+
+* pitfall 3
+
+unnecessarily complicated
 
 * Result
 
@@ -386,6 +403,8 @@ now lets start discussing the first one.
 
 * Multiple Optimizers
 
+reproduce -> reintroduce
+
 [[png:framework2]]
 
 ** Multiple Optimizers
@@ -407,24 +426,26 @@ now lets start discussing the first one.
 
 * Polytime + Search-based Result
 
-|                   |      <r> |       <r> |
-| Algorithm         |          |           |
-| X                 | $x$ only | AE+AD+$x$ |
-|-------------------+----------+-----------|
-| LAMA(15min)       |     100% |         - |
-| LAMA(30min)       |    99.3% |         - |
-| AE                |    98.4% |           |
-| AD                |    97.4% |           |
-| AIRS              |    97.9% |     95.6% |
-| PNGS              |    96.0% |     94.4% |
-| R-WIN             |    95.9% |     94.0% |
-|-------------------+----------+-----------|
-| CH-WIN (proposed) |    93.3% |   *91.8%* |
+|                   |      <r> |        <r> |
+| /                 |       <> |         <> |
+| Algorithm         |          |            |
+| /x/               | /x/ only | AE+AD+ /x/ |
+|-------------------+----------+------------|
+| LAMA(15min)       |     100% |          - |
+| LAMA(30min)       |    99.3% |          - |
+| AE                |    98.4% |            |
+| AD                |    97.4% |            |
+| AIRS              |    97.9% |      95.6% |
+| PNGS              |    96.0% |      94.4% |
+| R-WIN             |    95.9% |      94.0% |
+|-------------------+----------+------------|
+| CH-WIN (proposed) |    93.3% |    *91.8%* |
 
 * Lessons Learned
 
-+ Avoid premature optimization
++ *Avoid* unnecessary complexity
++ *R-WIN*, baseline, outperformed AIRS, PNGS etc.
 + Use the simplest variant as a baseline, improve upon it
-+ CH-WIN, improved AIRS variant
++ CH-WIN, an improved AIRS variant, outperformed previous algorithms
 + Reconfirmed poly+search effectiveness
 
