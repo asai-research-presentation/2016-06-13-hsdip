@@ -24,16 +24,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.61399265"
-     inkscape:cx="621.17726"
-     inkscape:cy="142.58632"
+     inkscape:zoom="1.2279853"
+     inkscape:cx="328.01414"
+     inkscape:cy="175.16"
      inkscape:current-layer="layer1"
      id="namedview4048"
      showgrid="false"
      units="in"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
-     inkscape:window-x="768"
+     inkscape:window-width="1024"
+     inkscape:window-height="688"
+     inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -77,15 +77,15 @@
          y="257.70602">Typical Characteristics of Anytime Algorithms</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:23.76973915px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold Italic'"
-       x="531.13666"
-       y="583.55304"
+       style="font-size:20px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.95102041999999998;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.19645691000000021;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold Italic"
+       x="601.98438"
+       y="572.96661"
        id="text3015"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3017"
-         x="531.13666"
-         y="583.55304">→time</tspan></text>
+         x="601.98438"
+         y="572.96661">→time</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:23.76973915px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold Italic'"
@@ -114,7 +114,7 @@
          y="324.40146">↑</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:23.76973915px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold'"
+       style="font-size:23.76973914999999948px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830507999999998;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
        x="108.29605"
        y="577.09155"
        id="text3799"
@@ -135,30 +135,30 @@
        sodipodi:nodetypes="csc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.47539482;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.90157916, 1.90157916;stroke-dashoffset:0"
-       d="m 216.2407,445.97821 c 0,0 10.68032,-60.28908 31.24595,-81.46644 28.48193,-29.32915 270.84797,-39.3564 334.53998,-39.13585"
+       d="m 250.44306,445.97821 c 0,0 10.68032,-60.28908 31.24595,-81.46644 28.48193,-29.32915 235.01692,-39.3564 298.70893,-39.13585"
        id="path3811-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.66027051;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.96162325, 3.96162325;stroke-dashoffset:0;marker-end:none"
-       d="m 215.78271,544.29267 0,-236.58185"
+       d="m 249.98507,544.29267 0,-236.58185"
        id="path3831"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-size:23.76973915px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold'"
-       x="343.92374"
-       y="511.1066"
+       style="font-size:23.76973915px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold'"
+       x="111.38428"
+       y="329.50833"
        id="text4013"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4015"
-         x="343.92374"
-         y="511.1066">&quot;algorithm</tspan><tspan
+         x="111.38428"
+         y="329.50833">&quot;algorithm</tspan><tspan
          sodipodi:role="line"
-         x="343.92374"
-         y="540.81879"
-         id="tspan4017">switch&quot;</tspan></text>
+         x="111.38428"
+         y="359.22052"
+         id="tspan3003">　　　switch&quot;→</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:23.76973915px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold'"
@@ -170,5 +170,44 @@
          id="tspan4021"
          x="574.41925"
          y="419.01181">Baseline:Iterative WA*</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.95102042;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.19645691;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="485.27817"
+       y="346.45197"
+       id="text3007"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3009"
+         x="485.27817"
+         y="346.45197">Possible to achieve</tspan><tspan
+         sodipodi:role="line"
+         x="485.27817"
+         y="371.45197"
+         id="tspan3011">better results</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.95102042;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.19645691;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="571.71033"
+       y="457.20245"
+       id="text3013"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="571.71033"
+         y="457.20245"
+         id="tspan3018">solution cost stops to improve</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.95102042;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.19645691;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="553.7948"
+       y="602.15533"
+       id="text3055"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3057"
+         x="553.7948"
+         y="602.15533">One major example: <tspan
+   style="fill:#ff0000"
+   id="tspan3111">Plan Postprocessing</tspan></tspan></text>
   </g>
 </svg>

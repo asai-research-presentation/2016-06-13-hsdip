@@ -10,12 +10,14 @@
 Shoma Endo, _Masataro Asai_, Alex Fukunaga
 
 University of Tokyo
+
+　
+
+Presentation available on
+
+https://guicho271828.github.io/2016-6-13-hsdip/
 #+END_CENTER
 #+END_outline-text-1
-
-CH-WIN の名前を出す
-
-
 
 * Satisficing Planning + Online Cost Refinements
 
@@ -25,38 +27,34 @@ CH-WIN の名前を出す
 
 [[png:anytime2]]
 
-#+BEGIN_ALIGNRIGHT
-+ *Major example: Plan Postprocessing*
-#+END_ALIGNRIGHT
 
 * Main Topic of the paper: Plan Postprocessing
 
 [[png:framework]]
 
-total 30 min
-15 min + 15 min
-
 * TODO Various Postprocessing Systems
 
 + Aras (Nakhost and Muller 2010)
-  + Action Elimination(*AE*) --- remove unnecessary 
-  + Plan Neighborhood Graph Search(*PNGS*)
-+ Action Dependency (*AD*) (Chrpa, McCluskey and Osborne 2012) --- bra bra bra
+  + Action Elimination(*AE*) --- remove trivially redundant actions
+  + Plan Neighborhood Graph Search(*PNGS*) --- replan on neighborhood graph
++ Action Dependency (*AD*) (Chrpa, McCluskey and Osborne 2012)
+  + Remove actions of inverse effects etc.
 + Block Deordering (BDPO2) (Siddiqui and Haslum 2013;2015)
+  + convert the input to partial order blocks, replan each block
 + Anytime Iterative Refinement of Solution (*AIRS*) (Estrem and Krebsbach 2012)
 
 * Two groups of Optimization Algorithms
 
-| <c>                      |   | <c>                    |
-| Polytime Optimizer       |   | Search-based Optimizer |
-|--------------------------+---+------------------------|
-| Based on the direct      |   | Refining a partial     |
-| analysis of a given plan |   | segment in a plan      |
-|--------------------------+---+------------------------|
-|                          |   |                        |
-|                          |   |                        |
-|                          |   |                        |
-|--------------------------+---+------------------------|
+| <c>                      |   | <c>                         |
+| Polytime Optimizer       |   | Search-based Optimizer      |
+|--------------------------+---+-----------------------------|
+| Based on the direct      |   | External solver refines     |
+| analysis of a given plan |   | a partial segment in a plan |
+|--------------------------+---+-----------------------------|
+|                          |   |                             |
+|                          |   |                             |
+|                          |   |                             |
+|--------------------------+---+-----------------------------|
 
 ** Polytime Optimizers
 
@@ -68,16 +66,16 @@ total 30 min
 
 ** Two groups of Optimization Algorithms
 
-| <c>                      |   | <c>                    |
-| Polytime Optimizer       |   | Search-based Optimizer |
-|--------------------------+---+------------------------|
-| Based on the direct      |   | Refining a partial     |
-| analysis of a given plan |   | segment in a plan      |
-|--------------------------+---+------------------------|
-| *AE : O(n^2)*            |   |                        |
-| *AD : O(n^2)*            |   |                        |
-| n: plan length           |   |                        |
-|--------------------------+---+------------------------|
+| <c>                      |   | <c>                         |
+| Polytime Optimizer       |   | Search-based Optimizer      |
+|--------------------------+---+-----------------------------|
+| Based on the direct      |   | External solver refines     |
+| analysis of a given plan |   | a partial segment in a plan |
+|--------------------------+---+-----------------------------|
+| *AE : O(n^2)*            |   |                             |
+| *AD : O(n^2)*            |   |                             |
+| n: plan length           |   |                             |
+|--------------------------+---+-----------------------------|
 
 ** Search-based Optimizers
 
@@ -89,16 +87,16 @@ total 30 min
 
 ** Two groups of Optimization Algorithms
 
-| <c>                      |   | <c>                    |
-| Polytime Optimizer       |   | Search-based Optimizer |
-|--------------------------+---+------------------------|
-| Based on the direct      |   | Refining a partial     |
-| analysis of a given plan |   | segment in a plan      |
-|--------------------------+---+------------------------|
-| AE : O(n^2)              |   | *PNGS*                 |
-| AD : O(n^2)              |   | *AIRS*                 |
-| n: plan length           |   | BDPO2                   |
-|--------------------------+---+------------------------|
+| <c>                      |   | <c>                         |
+| Polytime Optimizer       |   | Search-based Optimizer      |
+|--------------------------+---+-----------------------------|
+| Based on the direct      |   | External solver refines     |
+| analysis of a given plan |   | a partial segment in a plan |
+|--------------------------+---+-----------------------------|
+| AE : O(n^2)              |   | *PNGS*                      |
+| AD : O(n^2)              |   | *AIRS*                      |
+| n: plan length           |   | BDPO2                       |
+|--------------------------+---+-----------------------------|
 
 ** Search-based Optimizers Taxonomy
 
@@ -113,7 +111,7 @@ total 30 min
 |       | Subproblems are based on        | Subproblems are solved with |
 |-------+---------------------------------+-----------------------------|
 | PNGS  | neighborhood graph              |                             |
-|       |                                 |                             |
+|       | (search space around the plan)  |                             |
 | AIRS  | windows (ordered by Δcost/Δh) |                             |
 | BDPO2 | windows (block decomposition)   |                             |
 |       |                                 |                             |
@@ -138,7 +136,7 @@ total 30 min
 |       | Subproblems are based on        | Subproblems are solved with |
 |-------+---------------------------------+-----------------------------|
 | PNGS  | neighborhood graph              | Blind unit-cost A*          |
-|       |                                 | or Backward Breadths First  |
+|       | (search space around the plan)  | or Backward Breadths First  |
 | AIRS  | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
 | BDPO2 | windows (block decomposition)   | Admissible A*               |
 |       |                                 | or PNGS (layered approach)  |
@@ -167,22 +165,12 @@ i.e. Are these */complex/* algorithms necessary?
 Also, how effective is it to combine them?
 #+END_ALIGNRIGHT
 
-#+BEGIN_NOTE
-In this paper, we answer the following two open questions.
-
-the first one is, ...
-
-the second one is...
-
-now lets start discussing the first one.
-#+END_NOTE
-
 * Various Minor Differences in Search-based Optimizers ☹
 
 |       | Subproblems are based on          | Subproblems are solved with  |
 |-------+-----------------------------------+------------------------------|
 | PNGS  | *neighborhood graph*              | *Blind* unit-cost A*         |
-|       |                                   | or *Backward Breadths First* |
+|       | (search space around the plan)    | or *Backward Breadths First* |
 | AIRS  | windows *(ordered by Δcost/Δh)* | *Blind Bidirectional*        |
 | BDPO2 | windows *(block deordering)*      | Admissible A*                |
 |       |                                   | or *PNGS* (layered approach) |
@@ -198,7 +186,7 @@ now lets start discussing the first one.
 |         | Subproblems are based on        | Subproblems are solved with |
 |---------+---------------------------------+-----------------------------|
 | PNGS    | neighborhood graph              | Blind unit-cost A*          |
-|         |                                 | or Backward Breadths First  |
+|         | (search space around the plan)  | or Backward Breadths First  |
 | AIRS    | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
 | BDPO2   | windows (block deordering)      | Admissible A*               |
 |         |                                 | or PNGS (layered approach)  |
@@ -210,7 +198,7 @@ now lets start discussing the first one.
 |         | Subproblems are based on        | Subproblems are solved with |
 |---------+---------------------------------+-----------------------------|
 | PNGS    | neighborhood graph              | *Admissible A^＊ + LMcut*   |
-|         |                                 |                             |
+|         | (search space around the plan)  |                             |
 | AIRS    | windows (ordered by Δcost/Δh) | *Admissible A^＊ + LMcut*   |
 | BDPO2   | windows (block deordering)      | *Admissible A^＊ + LMcut*   |
 |         |                                 |                             |
@@ -222,9 +210,9 @@ now lets start discussing the first one.
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
-IPC instances
+39 IPC domains
 
-Optimize the 15 min results of LAMA
+Optimize the 15 min, 2GB results of LAMA
 
 Resource 15 min, 2GB
 
@@ -283,7 +271,9 @@ Participants AD, AE, AIRS, PNGS, R-WIN
 #+END_CONTAINER-FLUID
 
 #+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
 *Complex tweaks did not outperform the simplest variant*
+#+END_LARGER
 #+END_ALIGNRIGHT
 
 #+BEGIN_NOTE
@@ -294,7 +284,9 @@ BDPO2 unconfirmed
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
-"Improvements" should outperform the simplest baseline ☹
+☹
+
+Sadly "Improvements" did not outperform the simplest baseline
 #+END_CENTER
 #+END_XLARGE
 
@@ -302,21 +294,16 @@ BDPO2 unconfirmed
 
 #+BEGIN_XLARGE
 #+BEGIN_CENTER
-Now let's reliably improve upon the baseline ☺
+☺
+
+Now let's reliably improve upon the baseline
 #+END_CENTER
 #+END_XLARGE
 
-* Improve AIRS to outperform R-WIN
+* Improve AIRS to outperform R-WIN: CH-WIN
 
-Window priority: Δcost(i,j) / Δh(i,j)
-
-[[png:airs]]
-
-ここと pitfall 1 とのつながりが弱い
-
-* Improve AIRS to outperform R-WIN
-
-Why we chose AIRS:
+#+BEGIN_LARGER
+Why we chose AIRS?
 
 #+BEGIN_ALIGNRIGHT
 → Easy to implement, minimum diff from R-WIN
@@ -324,51 +311,59 @@ Why we chose AIRS:
 
 Problem in AIRS:
 
+#+BEGIN_CENTER
+Original AIRS is tested only on
+#+END_CENTER
+
 #+BEGIN_ALIGNRIGHT
-Original AIRS is tested only on *small-scale 15-puzzle/grid-pathfinding*
+*small-scale 15-puzzle/grid-pathfinding*
 
 *＜ 0.1 sec replanning time*
 #+END_ALIGNRIGHT
+#+END_LARGER
 
-* Pitfall 1
+* Window Priority Scheme in AIRS
+
+#+BEGIN_LARGER
+Window priority: *Δcost(i,j) / Δh(i,j)*
+#+END_LARGER
+
+[[png:airs]]
+
+* AIRS Pitfall 1 : windows too long
 
 [[png:binary-search]]
 
-割り算どうのは話さなくてもいい
-どのみち良くする
-
-** AIRS Pitfall 1
+** AIRS Pitfall 1 : windows too long
 
 [[png:binary-search2]]
 
-* Pitfall 2
+* AIRS Pitfall 2 : Penalty could inhibit solving promising windoes
 
 [[png:penalty]]
 
-CH-WIN removes penalty
+* AIRS pitfall 3 : Keep it simple
 
-* pitfall 3
-
-unnecessarily complicated
+[[png:toocomplicated]]
 
 * Result
 
-| Algorithm         | Harmonic Means |
-|                   |      of Ratios |
-|-------------------+----------------|
-| LAMA(15min)       |           100% |
-| LAMA(30min)       |          99.3% |
-| AE                |          98.4% |
-| AD                |          97.4% |
-| AIRS              |          97.9% |
-| PNGS              |          96.0% |
-| R-WIN             |          95.9% |
-|-------------------+----------------|
-| CH-WIN (proposed) |        *93.3%* |
+#+BEGIN_LARGER
+CH-WIN achieved the *best performance*
+#+END_LARGER
 
-#+BEGIN_ALIGNRIGHT
-*best performance*
-#+END_ALIGNRIGHT
+| Algorithm           | Harmonic Means |
+|                     |      of Ratios |
+|---------------------+----------------|
+| LAMA(15min)         |           100% |
+| LAMA(30min)         |          99.3% |
+| AE                  |          98.4% |
+| AD                  |          97.4% |
+| AIRS                |          97.9% |
+| PNGS                |          96.0% |
+| R-WIN               |          95.9% |
+|---------------------+----------------|
+| *CH-WIN (proposed)* |        *93.3%* |
 
 * Open Questions
 
@@ -377,7 +372,7 @@ unnecessarily complicated
 #+END_LARGER
 
 #+BEGIN_ALIGNRIGHT
-+i.e. Are these */complex/* algorithms necessary?+
++i.e. Are these */complex/* algorithms necessary?+ → Simple algorithms perform better
 #+END_ALIGNRIGHT
 
 　
@@ -390,7 +385,7 @@ unnecessarily complicated
 Also, how effective is it to combine them?
 #+END_ALIGNRIGHT
 
-#+BEGIN_NOTE
+#+BEGIN_RESUME
 In this paper, we answer the following two open questions.
 
 the first one is, ...
@@ -398,12 +393,9 @@ the first one is, ...
 the second one is...
 
 now lets start discussing the first one.
-#+END_NOTE
-
+#+END_RESUME
 
 * Multiple Optimizers
-
-reproduce -> reintroduce
 
 [[png:framework2]]
 
@@ -415,31 +407,33 @@ reproduce -> reintroduce
 
 [[png:framework4]]
 
-** Easier Done than Said...
+** Iterating Polytime Optimizer
 
 [[png:static/poly]]
 
 #+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
 + Iterating AE and AD is not effective
-+ we can apply them at most once
++ we can safely assume that we apply them *at most once*
+#+END_LARGER
 #+END_ALIGNRIGHT
 
 * Polytime + Search-based Result
 
-|                   |      <r> |        <r> |
-| /                 |       <> |         <> |
-| Algorithm         |          |            |
-| /x/               | /x/ only | AE+AD+ /x/ |
-|-------------------+----------+------------|
-| LAMA(15min)       |     100% |          - |
-| LAMA(30min)       |    99.3% |          - |
-| AE                |    98.4% |            |
-| AD                |    97.4% |            |
-| AIRS              |    97.9% |      95.6% |
-| PNGS              |    96.0% |      94.4% |
-| R-WIN             |    95.9% |      94.0% |
-|-------------------+----------+------------|
-| CH-WIN (proposed) |    93.3% |    *91.8%* |
+|                     |      <r> |        <r> |
+| /                   |       <> |         <> |
+| Algorithm           |          |            |
+| /x/                 | /x/ only | AE+AD+ /x/ |
+|---------------------+----------+------------|
+| LAMA(15min)         |     100% |          - |
+| LAMA(30min)         |    99.3% |          - |
+| AE                  |    97.4% |            |
+| AD                  |    98.4% |            |
+| AIRS                |    97.9% |      95.6% |
+| PNGS                |    96.0% |      94.4% |
+| R-WIN               |    95.9% |      94.0% |
+|---------------------+----------+------------|
+| *CH-WIN (proposed)* |    93.3% |    *91.8%* |
 
 * Lessons Learned
 
@@ -448,4 +442,16 @@ reproduce -> reintroduce
 + Use the simplest variant as a baseline, improve upon it
 + CH-WIN, an improved AIRS variant, outperformed previous algorithms
 + Reconfirmed poly+search effectiveness
+
+#+BEGIN_CENTER
+#+BEGIN_LARGER
+Thank you for Listening!
+
+　
+
+Presentation available on
+
+https://guicho271828.github.io/2016-6-13-hsdip/
+#+END_LARGER
+#+END_CENTER
 

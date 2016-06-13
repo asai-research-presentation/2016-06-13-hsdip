@@ -228,9 +228,9 @@
      inkscape:current-layer="layer1"
      showgrid="false"
      units="in"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
-     inkscape:window-x="768"
+     inkscape:window-width="1024"
+     inkscape:window-height="688"
+     inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
      fit-margin-top="0.2"
@@ -258,7 +258,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -807,7 +807,7 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Bold'"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830507999999998;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
        x="544.25201"
        y="825.9704"
        id="text3179"
@@ -815,7 +815,7 @@
          sodipodi:role="line"
          id="tspan3181"
          x="544.25201"
-         y="825.9704">Does it reproduce the inefficiencies</tspan><tspan
+         y="825.9704">Does it reintroduce the inefficiencies</tspan><tspan
          sodipodi:role="line"
          x="544.25201"
          y="840.9704"
