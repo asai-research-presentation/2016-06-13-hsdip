@@ -5,17 +5,15 @@
 #+LINK: png file:img/%s.png
 #+LINK: jpg file:img/%s.jpg
 
+#+BEGIN_NOTE
+Presentation available on https://guicho271828.github.io/2016-6-13-hsdip/
+#+END_NOTE
+
 #+BEGIN_outline-text-1
 #+BEGIN_CENTER
 Shoma Endo, _Masataro Asai_, Alex Fukunaga
 
 University of Tokyo
-
-　
-
-Presentation available on
-
-https://guicho271828.github.io/2016-6-13-hsdip/
 #+END_CENTER
 #+END_outline-text-1
 
@@ -314,7 +312,7 @@ Luckily we have a reliable baseline to improve upon!
 Why we chose AIRS?
 
 #+BEGIN_ALIGNRIGHT
-→ Easy to implement, minimum diff from R-WIN
+→ *Easy* to implement, *minimum diff* from R-WIN
 #+END_ALIGNRIGHT
 
 Problem in AIRS:
@@ -403,16 +401,6 @@ CH-WIN achieved the *best performance*
 Also, how effective is it to combine them?
 #+END_ALIGNRIGHT
 
-#+BEGIN_RESUME
-In this paper, we answer the following two open questions.
-
-the first one is, ...
-
-the second one is...
-
-now lets start discussing the first one.
-#+END_RESUME
-
 * Multiple Optimizers
 
 [[png:framework2]]
@@ -457,19 +445,13 @@ now lets start discussing the first one.
 
 + *Avoid* unnecessary complexity
 + *R-WIN*, baseline, outperformed AIRS, PNGS etc.
-+ Use the simplest variant as a baseline, improve upon it
+  + Use the simplest variant as a baseline, improve upon it
 + CH-WIN, an improved AIRS variant, outperformed previous algorithms
 + Reconfirmed poly+search effectiveness
 
 #+BEGIN_CENTER
 #+BEGIN_LARGER
 Thank you for Listening!
-
-　
-
-Presentation available on
-
-https://guicho271828.github.io/2016-6-13-hsdip/
 #+END_LARGER
 #+END_CENTER
 
