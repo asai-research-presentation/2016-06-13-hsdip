@@ -19,7 +19,7 @@ nokey: img presen-nokey.pdf
 resume: img resume.pdf
 
 deploy: index
-	+scripts/deploy.sh git@github.com:$(GH_USER)/$$(basename $$(readlink -ef .)).git
+	+scripts/deploy.sh git@github.com:$(GH_USER)/$$(basename $$(readlink -ef .))
 
 index: html
 	cp -f presen.org.html index.html
