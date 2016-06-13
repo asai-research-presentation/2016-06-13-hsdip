@@ -108,7 +108,7 @@ https://guicho271828.github.io/2016-6-13-hsdip/
 
 #+END_SPAN3
 #+BEGIN_SPAN9
-|       | Subproblems are based on        | Subproblems are solved with |
+|       | Subproblems Generation        | Underlying Solver |
 |-------+---------------------------------+-----------------------------|
 | PNGS  | neighborhood graph              |                             |
 |       | (search space around the plan)  |                             |
@@ -127,20 +127,20 @@ https://guicho271828.github.io/2016-6-13-hsdip/
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
-#+BEGIN_SPAN3
+#+BEGIN_SPAN2
 
 [[png:search-based2]]
 
-#+END_SPAN3
-#+BEGIN_SPAN9
-|       | Subproblems are based on        | Subproblems are solved with |
+#+END_SPAN2
+#+BEGIN_SPAN10
+|       | Subproblems Generation        | Underlying Solver |
 |-------+---------------------------------+-----------------------------|
 | PNGS  | neighborhood graph              | Blind unit-cost A*          |
 |       | (search space around the plan)  | or Backward Breadths First  |
 | AIRS  | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
 | BDPO2 | windows (block decomposition)   | Admissible A*               |
 |       |                                 | or PNGS (layered approach)  |
-#+END_SPAN9
+#+END_SPAN10
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
@@ -167,7 +167,7 @@ Also, how effective is it to combine them?
 
 * Various Minor Differences in Search-based Optimizers ☹
 
-|       | Subproblems are based on          | Subproblems are solved with  |
+|       | Subproblems Generation          | Underlying Solver  |
 |-------+-----------------------------------+------------------------------|
 | PNGS  | *neighborhood graph*              | *Blind* unit-cost A*         |
 |       | (search space around the plan)    | or *Backward Breadths First* |
@@ -178,32 +178,40 @@ Also, how effective is it to combine them?
 |       |                                   |                              |
 
 #+BEGIN_ALIGNRIGHT
-*→ The amount of observation from the experiments are limited*
+#+BEGIN_LARGER
+*→ Hard to obtain a useful observation from the experiments*
+#+END_LARGER
 #+END_ALIGNRIGHT
 
 * /Simplest baseline/ of search-based optimizers : */R-WIN/*
 
-|         | Subproblems are based on        | Subproblems are solved with |
-|---------+---------------------------------+-----------------------------|
-| PNGS    | neighborhood graph              | Blind unit-cost A*          |
-|         | (search space around the plan)  | or Backward Breadths First  |
-| AIRS    | windows (ordered by Δcost/Δh) | Blind Bidirectional         |
-| BDPO2   | windows (block deordering)      | Admissible A*               |
-|         |                                 | or PNGS (layered approach)  |
-|---------+---------------------------------+-----------------------------|
-| *R-WIN* | *windows* (*random*)            | *Admissible A^＊ + LMcut*   |
+|           | Subproblems Generation          | Underlying Solver          |
+|-----------+---------------------------------+----------------------------|
+| PNGS      | neighborhood graph              | Blind unit-cost A*         |
+|           | (search space around the plan)  | or Backward Breadths First |
+| AIRS      | windows (ordered by Δcost/Δh) | Blind Bidirectional        |
+| BDPO2     | windows (block deordering)      | Admissible A*              |
+|           |                                 | or PNGS (layered approach) |
+|-----------+---------------------------------+----------------------------|
+| */R-WIN/* | *windows* (*random*)            | *Admissible A^＊ + LMcut*  |
 
 * Evaluate them in an "/Equal Condition/"
 
-|         | Subproblems are based on        | Subproblems are solved with |
-|---------+---------------------------------+-----------------------------|
-| PNGS    | neighborhood graph              | *Admissible A^＊ + LMcut*   |
-|         | (search space around the plan)  |                             |
-| AIRS    | windows (ordered by Δcost/Δh) | *Admissible A^＊ + LMcut*   |
-| BDPO2   | windows (block deordering)      | *Admissible A^＊ + LMcut*   |
-|         |                                 |                             |
-|---------+---------------------------------+-----------------------------|
-| *R-WIN* | *windows* (*random*)            | *Admissible A^＊ + LMcut*   |
+|       | Subproblems Generation        | Underlying Solver |
+|-------+---------------------------------+-----------------------------|
+| PNGS  | neighborhood graph              | *Admissible A^＊ + LMcut*   |
+|       | (search space around the plan)  |                             |
+| AIRS  | windows (ordered by Δcost/Δh) | *Admissible A^＊ + LMcut*   |
+| BDPO2 | windows (block deordering)      | *Admissible A^＊ + LMcut*   |
+|       |                                 |                             |
+|-------+---------------------------------+-----------------------------|
+| R-WIN | windows (random)                | *Admissible A^＊ + LMcut*   |
+
+#+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
+*→ Focus on the subproblem generation*
+#+END_LARGER
+#+END_ALIGNRIGHT
 
 * Evaluation
 
@@ -219,6 +227,8 @@ Resource 15 min, 2GB
 Participants AD, AE, AIRS, PNGS, R-WIN
 
 (BDPO2 is not tested)
+
+(AD, AE as a point of reference)
 #+END_SPAN6
 #+BEGIN_SPAN6
 |             |            <r> |
@@ -245,15 +255,17 @@ Participants AD, AE, AIRS, PNGS, R-WIN
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
-IPC instances
+39 IPC domains
 
-Optimize the 15 min results of LAMA
+Optimize the 15 min, 2GB results of LAMA
 
 Resource 15 min, 2GB
 
 Participants AD, AE, AIRS, PNGS, R-WIN
 
 (BDPO2 is not tested)
+
+(AD, AE as a point of reference)
 #+END_SPAN6
 #+BEGIN_SPAN6
 | Algorithm   | Harmonic Means |
@@ -276,10 +288,6 @@ Participants AD, AE, AIRS, PNGS, R-WIN
 #+END_LARGER
 #+END_ALIGNRIGHT
 
-#+BEGIN_NOTE
-BDPO2 unconfirmed
-#+END_NOTE
-
 * 
 
 #+BEGIN_XLARGE
@@ -296,11 +304,11 @@ Sadly "Improvements" did not outperform the simplest baseline
 #+BEGIN_CENTER
 ☺
 
-Now let's reliably improve upon the baseline
+Luckily we have a reliable baseline to improve upon!
 #+END_CENTER
 #+END_XLARGE
 
-* Improve AIRS to outperform R-WIN: CH-WIN
+* Improve AIRS to outperform R-WIN: */CH-WIN/*
 
 #+BEGIN_LARGER
 Why we chose AIRS?
@@ -325,24 +333,34 @@ Original AIRS is tested only on
 * Window Priority Scheme in AIRS
 
 #+BEGIN_LARGER
-Window priority: *Δcost(i,j) / Δh(i,j)*
+Priority: *Δcost(i,j) / Δh(i,j)*
 #+END_LARGER
 
 [[png:airs]]
 
-* AIRS Pitfall 1 : windows too long
+#+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
+Priority seems promising, *but...*
+#+END_LARGER
+#+END_ALIGNRIGHT
+
+* AIRS Pitfall 1 : Windows may be too long/difficult
 
 [[png:binary-search]]
 
-** AIRS Pitfall 1 : windows too long
+** AIRS Pitfall 1 : Windows may be too long/difficult
 
 [[png:binary-search2]]
 
-* AIRS Pitfall 2 : Penalty could inhibit solving promising windoes
+* AIRS Pitfall 2 : Inappropriate Penalty Scheme
 
 [[png:penalty]]
 
-* AIRS pitfall 3 : Keep it simple
+** AIRS Pitfall 2 : Inappropriate Penalty Scheme
+
+ [[png:penalty2]]
+
+* AIRS Pitfall 3 : Overly Complicated → Keep it simple
 
 [[png:toocomplicated]]
 
@@ -403,9 +421,9 @@ now lets start discussing the first one.
 
 [[png:framework3]]
 
-** Polytime + Search-based Optimizers
-
-[[png:framework4]]
+# ** Polytime + Search-based Optimizers
+# 
+# [[png:framework4]]
 
 ** Iterating Polytime Optimizer
 
