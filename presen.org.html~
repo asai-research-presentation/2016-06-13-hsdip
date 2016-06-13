@@ -1,0 +1,1498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Evaluation of a Simple, Window-based, Replanning Approach to Plan Optimization</title>
+<!-- 2016-06-13 月 11:27 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Masataro Asai" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/layout.css" />
+<link rel="stylesheet" type="text/css" href="css/default.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.loupe.min.js"></script>
+<script type="text/javascript" src="js/jgestures/jgestures.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Evaluation of a Simple, Window-based, Replanning Approach to Plan Optimization</h1>
+<div class="note">
+<p>
+Presentation available on <a href="https://guicho271828.github.io/2016-6-13-hsdip/">https://guicho271828.github.io/2016-6-13-hsdip/</a> ; Press n/p key to move to next/previous slide
+</p>
+
+</div>
+
+<div class="outline-text-1">
+<div class="center">
+<p>
+Shoma Endo, <span class="underline">Masataro Asai</span>, Alex Fukunaga
+</p>
+
+<p>
+University of Tokyo
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Satisficing Planning + Online Cost Refinements</h2>
+<div class="outline-text-2" id="text-1">
+
+<div class="figure">
+<p><img src="img/anytime1.png" alt="anytime1.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Satisficing Planning + Algorithm Switch</h2>
+<div class="outline-text-2" id="text-2">
+
+<div class="figure">
+<p><img src="img/anytime2.png" alt="anytime2.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Main Topic of the paper: Plan Postprocessing</h2>
+<div class="outline-text-2" id="text-3">
+
+<div class="figure">
+<p><img src="img/framework.png" alt="framework.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Various Postprocessing Systems</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>Aras (Nakhost and Muller 2010)
+<ul class="org-ul">
+<li>Action Elimination(<b>AE</b>) &#x2014; remove trivially redundant actions
+</li>
+<li>Plan Neighborhood Graph Search(<b>PNGS</b>) &#x2014; replan on neighborhood graph
+</li>
+</ul>
+</li>
+<li>Action Dependency (<b>AD</b>) (Chrpa, McCluskey and Osborne 2012)
+<ul class="org-ul">
+<li>Remove actions of inverse effects etc.
+</li>
+</ul>
+</li>
+<li>Block Deordering (BDPO2) (Siddiqui and Haslum 2013;2015)
+<ul class="org-ul">
+<li>convert the input to partial order blocks, replan each block
+</li>
+</ul>
+</li>
+<li>Anytime Iterative Refinement of Solution (<b>AIRS</b>) (Estrem and Krebsbach 2012)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Two groups of Optimization Algorithms</h2>
+<div class="outline-text-2" id="text-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="center" />
+
+<col  class="left" />
+
+<col  class="center" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="center">Polytime Optimizer</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="center">Search-based Optimizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="center">Based on the direct</td>
+<td class="left">&#xa0;</td>
+<td class="center">External solver refines</td>
+</tr>
+
+<tr>
+<td class="center">analysis of a given plan</td>
+<td class="left">&#xa0;</td>
+<td class="center">a partial segment in a plan</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="center">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="center">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="center">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Polytime Optimizers</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<div class="figure">
+<p><img src="img/polytime.png" alt="polytime.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Polytime Optimizers</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<div class="figure">
+<p><img src="img/polytime2.png" alt="polytime2.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Two groups of Optimization Algorithms</h3>
+<div class="outline-text-3" id="text-5-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="center" />
+
+<col  class="left" />
+
+<col  class="center" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="center">Polytime Optimizer</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="center">Search-based Optimizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="center">Based on the direct</td>
+<td class="left">&#xa0;</td>
+<td class="center">External solver refines</td>
+</tr>
+
+<tr>
+<td class="center">analysis of a given plan</td>
+<td class="left">&#xa0;</td>
+<td class="center">a partial segment in a plan</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="center"><b>AE : O(n<sup>2</sup>)</b></td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="center"><b>AD : O(n<sup>2</sup>)</b></td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="center">n: plan length</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Search-based Optimizers</h3>
+<div class="outline-text-3" id="text-5-4">
+
+<div class="figure">
+<p><img src="img/search-based.png" alt="search-based.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Search-based Optimizers</h3>
+<div class="outline-text-3" id="text-5-5">
+
+<div class="figure">
+<p><img src="img/search-based2.png" alt="search-based2.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-6" class="outline-3">
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Two groups of Optimization Algorithms</h3>
+<div class="outline-text-3" id="text-5-6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="center" />
+
+<col  class="left" />
+
+<col  class="center" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="center">Polytime Optimizer</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="center">Search-based Optimizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="center">Based on the direct</td>
+<td class="left">&#xa0;</td>
+<td class="center">External solver refines</td>
+</tr>
+
+<tr>
+<td class="center">analysis of a given plan</td>
+<td class="left">&#xa0;</td>
+<td class="center">a partial segment in a plan</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="center">AE : O(n<sup>2</sup>)</td>
+<td class="left">&#xa0;</td>
+<td class="center"><b>PNGS</b></td>
+</tr>
+
+<tr>
+<td class="center">AD : O(n<sup>2</sup>)</td>
+<td class="left">&#xa0;</td>
+<td class="center"><b>AIRS</b></td>
+</tr>
+
+<tr>
+<td class="center">n: plan length</td>
+<td class="left">&#xa0;</td>
+<td class="center">BDPO2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-7" class="outline-3">
+<h3 id="sec-5-7"><span class="section-number-3">5.7</span> Search-based Optimizers Taxonomy</h3>
+<div class="outline-text-3" id="text-5-7">
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span3">
+<p>
+
+</p>
+
+
+<div class="figure">
+<p><img src="img/search-based2.png" alt="search-based2.png" />
+</p>
+</div>
+
+</div>
+<div class="span9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Subproblems Generation</th>
+<th scope="col" class="left">Underlying Solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">PNGS</td>
+<td class="left">neighborhood graph</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">(search space around the plan)</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="left">windows (ordered by Δcost/Δh)</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">BDPO2</td>
+<td class="left">windows (block decomposition)</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-8" class="outline-3">
+<h3 id="sec-5-8"><span class="section-number-3">5.8</span> Window-based optimization</h3>
+<div class="outline-text-3" id="text-5-8">
+
+<div class="figure">
+<p><img src="img/window.png" alt="window.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-9" class="outline-3">
+<h3 id="sec-5-9"><span class="section-number-3">5.9</span> Search-based Optimizers Taxonomy</h3>
+<div class="outline-text-3" id="text-5-9">
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span2">
+<p>
+
+</p>
+
+
+<div class="figure">
+<p><img src="img/search-based2.png" alt="search-based2.png" />
+</p>
+</div>
+
+</div>
+<div class="span10">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Subproblems Generation</th>
+<th scope="col" class="left">Underlying Solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">PNGS</td>
+<td class="left">neighborhood graph</td>
+<td class="left">Blind unit-cost A*</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">(search space around the plan)</td>
+<td class="left">or Backward Breadths First</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="left">windows (ordered by Δcost/Δh)</td>
+<td class="left">Blind Bidirectional</td>
+</tr>
+
+<tr>
+<td class="left">BDPO2</td>
+<td class="left">windows (block decomposition)</td>
+<td class="left">Admissible A*</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">or PNGS (layered approach)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Open Questions</h2>
+<div class="outline-text-2" id="text-6">
+<div class="larger">
+<p>
+<b>What is the <i>baseline</i> of various search-based optimizers?</b>
+</p>
+
+</div>
+
+<div class="alignright">
+<p>
+i.e. Are these <b><i>complex</i></b> algorithms necessary?
+</p>
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="larger">
+<p>
+<b>How to <i>combine</i> Polytime and Search-based Optimizers?</b>
+</p>
+
+</div>
+
+<div class="alignright">
+<p>
+Also, how effective is it to combine them?
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Various Minor Differences in Search-based Optimizers ☹</h2>
+<div class="outline-text-2" id="text-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Subproblems Generation</th>
+<th scope="col" class="left">Underlying Solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">PNGS</td>
+<td class="left"><b>neighborhood graph</b></td>
+<td class="left"><b>Blind</b> unit-cost A*</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">(search space around the plan)</td>
+<td class="left">or <b>Backward Breadths First</b></td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="left">windows <b>(ordered by Δcost/Δh)</b></td>
+<td class="left"><b>Blind Bidirectional</b></td>
+</tr>
+
+<tr>
+<td class="left">BDPO2</td>
+<td class="left">windows <b>(block deordering)</b></td>
+<td class="left">Admissible A*</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">or <b>PNGS</b> (layered approach)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<div class="alignright">
+<div class="larger">
+<p>
+<b>→ Hard to obtain a useful observation from the experiments</b>
+</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> <i>Simplest baseline</i> of search-based optimizers : <b><i>R-WIN</i></b></h2>
+<div class="outline-text-2" id="text-8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Subproblems Generation</th>
+<th scope="col" class="left">Underlying Solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">PNGS</td>
+<td class="left">neighborhood graph</td>
+<td class="left">Blind unit-cost A*</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">(search space around the plan)</td>
+<td class="left">or Backward Breadths First</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="left">windows (ordered by Δcost/Δh)</td>
+<td class="left">Blind Bidirectional</td>
+</tr>
+
+<tr>
+<td class="left">BDPO2</td>
+<td class="left">windows (block deordering)</td>
+<td class="left">Admissible A*</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">or PNGS (layered approach)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b><i>R-WIN</i></b></td>
+<td class="left"><b>windows</b> (<b>random</b>)</td>
+<td class="left"><b>Admissible A<sup>＊</sup> + LMcut</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Evaluate them in an "<i>Equal Condition</i>"</h2>
+<div class="outline-text-2" id="text-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Subproblems Generation</th>
+<th scope="col" class="left">Underlying Solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">PNGS</td>
+<td class="left">neighborhood graph</td>
+<td class="left"><b>Admissible A<sup>＊</sup> + LMcut</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">(search space around the plan)</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="left">windows (ordered by Δcost/Δh)</td>
+<td class="left"><b>Admissible A<sup>＊</sup> + LMcut</b></td>
+</tr>
+
+<tr>
+<td class="left">BDPO2</td>
+<td class="left">windows (block deordering)</td>
+<td class="left"><b>Admissible A<sup>＊</sup> + LMcut</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">R-WIN</td>
+<td class="left">windows (random)</td>
+<td class="left"><b>Admissible A<sup>＊</sup> + LMcut</b></td>
+</tr>
+</tbody>
+</table>
+
+<div class="alignright">
+<div class="larger">
+<p>
+<b>→ Focus on the subproblem generation</b>
+</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Evaluation</h2>
+<div class="outline-text-2" id="text-10">
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span6">
+<p>
+39 IPC domains
+</p>
+
+<p>
+Optimize the 15 min, 2GB results of LAMA
+</p>
+
+<p>
+Resource 15 min, 2GB
+</p>
+
+<p>
+Participants AD, AE, AIRS, PNGS, R-WIN
+</p>
+
+<p>
+(BDPO2 is not tested)
+</p>
+
+<p>
+(AD, AE as a point of reference)
+</p>
+
+</div>
+<div class="span6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Algorithm</th>
+<th scope="col" class="right">Harmonic Means</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="right">of Ratios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">LAMA(15min)</td>
+<td class="right">100%</td>
+</tr>
+
+<tr>
+<td class="left">LAMA(30min)</td>
+<td class="right">%</td>
+</tr>
+
+<tr>
+<td class="left">AE</td>
+<td class="right">%</td>
+</tr>
+
+<tr>
+<td class="left">AD</td>
+<td class="right">%</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="right">%</td>
+</tr>
+
+<tr>
+<td class="left">PNGS</td>
+<td class="right">%</td>
+</tr>
+
+<tr>
+<td class="left">R-WIN</td>
+<td class="right">%</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="alignright">
+<p>
+　
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Results</h2>
+<div class="outline-text-2" id="text-11">
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span6">
+<p>
+39 IPC domains
+</p>
+
+<p>
+Optimize the 15 min, 2GB results of LAMA
+</p>
+
+<p>
+Resource 15 min, 2GB
+</p>
+
+<p>
+Participants AD, AE, AIRS, PNGS, R-WIN
+</p>
+
+<p>
+(BDPO2 is not tested)
+</p>
+
+<p>
+(AD, AE as a point of reference)
+</p>
+
+</div>
+<div class="span6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Algorithm</th>
+<th scope="col" class="right">Harmonic Means</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="right">of Ratios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">LAMA(15min)</td>
+<td class="right">100%</td>
+</tr>
+
+<tr>
+<td class="left">LAMA(30min)</td>
+<td class="right">99.3%</td>
+</tr>
+
+<tr>
+<td class="left">AE</td>
+<td class="right">98.4%</td>
+</tr>
+
+<tr>
+<td class="left">AD</td>
+<td class="right">97.4%</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="right">97.9%</td>
+</tr>
+
+<tr>
+<td class="left">PNGS</td>
+<td class="right">96.0%</td>
+</tr>
+
+<tr>
+<td class="left">R-WIN</td>
+<td class="right"><b>95.9%</b></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="alignright">
+<div class="larger">
+<p>
+<b>Complex tweaks did not outperform the simplest variant</b>
+</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> </h2>
+<div class="outline-text-2" id="text-12">
+<div class="xlarge">
+<div class="center">
+<p>
+☹
+</p>
+
+<p>
+Sadly "Improvements" did not outperform the simplest baseline
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> </h2>
+<div class="outline-text-2" id="text-13">
+<div class="xlarge">
+<div class="center">
+<p>
+☺
+</p>
+
+<p>
+Luckily we have a reliable baseline to improve upon!
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Improve AIRS to outperform R-WIN: <b><i>CH-WIN</i></b></h2>
+<div class="outline-text-2" id="text-14">
+<div class="larger">
+<p>
+Why we chose AIRS?
+</p>
+
+<div class="alignright">
+<p>
+→ <b>Easy</b> to implement, <b>minimum diff</b> from R-WIN
+</p>
+
+</div>
+
+<p>
+Problem in AIRS:
+</p>
+
+<div class="center">
+<p>
+Original AIRS is tested only on
+</p>
+</div>
+
+<div class="alignright">
+<p>
+<b>small-scale 15-puzzle/grid-pathfinding</b>
+</p>
+
+<p>
+<b>＜ 0.1 sec replanning time</b>
+</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Window Priority Scheme in AIRS</h2>
+<div class="outline-text-2" id="text-15">
+<div class="larger">
+<p>
+Priority: <b>Δcost(i,j) / Δh(i,j)</b>
+</p>
+
+</div>
+
+
+<div class="figure">
+<p><img src="img/airs.png" alt="airs.png" />
+</p>
+</div>
+
+<div class="alignright">
+<div class="larger">
+<p>
+Priority seems promising, <b>but&#x2026;</b>
+</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> AIRS Pitfall 1 : Windows may be too long/difficult</h2>
+<div class="outline-text-2" id="text-16">
+
+<div class="figure">
+<p><img src="img/binary-search.png" alt="binary-search.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-16-1" class="outline-3">
+<h3 id="sec-16-1"><span class="section-number-3">16.1</span> AIRS Pitfall 1 : Windows may be too long/difficult</h3>
+<div class="outline-text-3" id="text-16-1">
+
+<div class="figure">
+<p><img src="img/binary-search2.png" alt="binary-search2.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> AIRS Pitfall 2 : Inappropriate Penalty Scheme</h2>
+<div class="outline-text-2" id="text-17">
+
+<div class="figure">
+<p><img src="img/penalty.png" alt="penalty.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-17-1" class="outline-3">
+<h3 id="sec-17-1"><span class="section-number-3">17.1</span> AIRS Pitfall 2 : Inappropriate Penalty Scheme</h3>
+<div class="outline-text-3" id="text-17-1">
+
+<div class="figure">
+<p><img src="img/penalty2.png" alt="penalty2.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> AIRS Pitfall 3 : Overly Complicated → Keep it simple</h2>
+<div class="outline-text-2" id="text-18">
+
+<div class="figure">
+<p><img src="img/toocomplicated.png" alt="toocomplicated.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> Result</h2>
+<div class="outline-text-2" id="text-19">
+<div class="larger">
+<p>
+CH-WIN achieved the <b>best performance</b>
+</p>
+
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Algorithm</th>
+<th scope="col" class="right">Harmonic Means</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="right">of Ratios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">LAMA(15min)</td>
+<td class="right">100%</td>
+</tr>
+
+<tr>
+<td class="left">LAMA(30min)</td>
+<td class="right">99.3%</td>
+</tr>
+
+<tr>
+<td class="left">AE</td>
+<td class="right">98.4%</td>
+</tr>
+
+<tr>
+<td class="left">AD</td>
+<td class="right">97.4%</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="right">97.9%</td>
+</tr>
+
+<tr>
+<td class="left">PNGS</td>
+<td class="right">96.0%</td>
+</tr>
+
+<tr>
+<td class="left">R-WIN</td>
+<td class="right">95.9%</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>CH-WIN (proposed)</b></td>
+<td class="right"><b>93.3%</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> Open Questions</h2>
+<div class="outline-text-2" id="text-20">
+<div class="larger">
+<p>
+<del>What is the <i>baseline</i> of various search-based optimizers?</del>
+</p>
+
+</div>
+
+<div class="alignright">
+<p>
+<del>i.e. Are these <b><i>complex</i></b> algorithms necessary?</del> → Simple algorithms perform better
+</p>
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="larger">
+<p>
+<b>How to <i>combine</i> Polytime and Search-based Optimizers?</b>
+</p>
+
+</div>
+
+<div class="alignright">
+<p>
+Also, how effective is it to combine them?
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> Multiple Optimizers</h2>
+<div class="outline-text-2" id="text-21">
+
+<div class="figure">
+<p><img src="img/framework2.png" alt="framework2.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-21-1" class="outline-3">
+<h3 id="sec-21-1"><span class="section-number-3">21.1</span> Multiple Optimizers</h3>
+<div class="outline-text-3" id="text-21-1">
+
+<div class="figure">
+<p><img src="img/framework3.png" alt="framework3.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-21-2" class="outline-3">
+<h3 id="sec-21-2"><span class="section-number-3">21.2</span> Iterating Polytime Optimizer</h3>
+<div class="outline-text-3" id="text-21-2">
+
+<div class="figure">
+<p><img src="img/static/poly.png" alt="poly.png" />
+</p>
+</div>
+
+<div class="alignright">
+<div class="larger">
+<ul class="org-ul">
+<li>Iterating AE and AD is not effective
+</li>
+<li>we can safely assume that we apply them <b>at most once</b>
+</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-22" class="outline-2">
+<h2 id="sec-22"><span class="section-number-2">22</span> Polytime + Search-based Result</h2>
+<div class="outline-text-2" id="text-22">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+</colgroup>
+
+<colgroup>
+<col  class="right" />
+</colgroup>
+
+<colgroup>
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Algorithm</th>
+<th scope="col" class="right">&#xa0;</th>
+<th scope="col" class="right">&#xa0;</th>
+</tr>
+
+<tr>
+<th scope="col" class="left"><i>x</i></th>
+<th scope="col" class="right"><i>x</i> only</th>
+<th scope="col" class="right">AE+AD+ <i>x</i></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">LAMA(15min)</td>
+<td class="right">100%</td>
+<td class="right">-</td>
+</tr>
+
+<tr>
+<td class="left">LAMA(30min)</td>
+<td class="right">99.3%</td>
+<td class="right">-</td>
+</tr>
+
+<tr>
+<td class="left">AE</td>
+<td class="right">97.4%</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">AD</td>
+<td class="right">98.4%</td>
+<td class="right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">AIRS</td>
+<td class="right">97.9%</td>
+<td class="right">95.6%</td>
+</tr>
+
+<tr>
+<td class="left">PNGS</td>
+<td class="right">96.0%</td>
+<td class="right">94.4%</td>
+</tr>
+
+<tr>
+<td class="left">R-WIN</td>
+<td class="right">95.9%</td>
+<td class="right">94.0%</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>CH-WIN (proposed)</b></td>
+<td class="right">93.3%</td>
+<td class="right"><b>91.8%</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-23" class="outline-2">
+<h2 id="sec-23"><span class="section-number-2">23</span> Lessons Learned</h2>
+<div class="outline-text-2" id="text-23">
+<ul class="org-ul">
+<li><b>Avoid</b> unnecessary complexity
+</li>
+<li><b>R-WIN</b>, baseline, outperformed AIRS, PNGS etc.
+<ul class="org-ul">
+<li>Use the simplest variant as a baseline, improve upon it
+</li>
+</ul>
+</li>
+<li>CH-WIN, an improved AIRS variant, outperformed previous algorithms
+</li>
+<li>Reconfirmed poly+search effectiveness
+</li>
+</ul>
+
+<div class="center">
+<div class="larger">
+<p>
+Thank you for Listening!
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Masataro Asai</p>
+<p class="date">Created: 2016-06-13 月 11:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -6,7 +6,7 @@
 #+LINK: jpg file:img/%s.jpg
 
 #+BEGIN_NOTE
-Presentation available on https://guicho271828.github.io/2016-6-13-hsdip/
+Presentation available on https://guicho271828.github.io/2016-6-13-hsdip/ ; Press n/p key to move to next/previous slide
 #+END_NOTE
 
 #+BEGIN_outline-text-1

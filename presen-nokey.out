@@ -1,0 +1,36 @@
+\BOOKMARK [1][-]{section.1}{1 Satisficing Planning + Online Cost Refinements}{}% 1
+\BOOKMARK [1][-]{section.2}{2 Satisficing Planning + Algorithm Switch}{}% 2
+\BOOKMARK [1][-]{section.3}{3 Main Topic of the paper: Plan Postprocessing}{}% 3
+\BOOKMARK [1][-]{section.4}{4 Various Postprocessing Systems}{}% 4
+\BOOKMARK [1][-]{section.5}{5 Two groups of Optimization Algorithms}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{5.1 Polytime Optimizers}{section.5}% 6
+\BOOKMARK [2][-]{subsection.5.2}{5.2 Polytime Optimizers}{section.5}% 7
+\BOOKMARK [2][-]{subsection.5.3}{5.3 Two groups of Optimization Algorithms}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.4}{5.4 Search-based Optimizers}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.5}{5.5 Search-based Optimizers}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.6}{5.6 Two groups of Optimization Algorithms}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.7}{5.7 Search-based Optimizers Taxonomy}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.8}{5.8 Window-based optimization}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.9}{5.9 Search-based Optimizers Taxonomy}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{6 Open Questions}{}% 15
+\BOOKMARK [1][-]{section.7}{7 Various Minor Differences in Search-based Optimizers â^^98¹}{}% 16
+\BOOKMARK [1][-]{section.8}{8 Simplest baseline of search-based optimizers : R-WIN}{}% 17
+\BOOKMARK [1][-]{section.9}{9 Evaluate them in an "Equal Condition"}{}% 18
+\BOOKMARK [1][-]{section.10}{10 Evaluation}{}% 19
+\BOOKMARK [1][-]{section.11}{11 Results}{}% 20
+\BOOKMARK [1][-]{section.12}{12 }{}% 21
+\BOOKMARK [1][-]{section.13}{13 }{}% 22
+\BOOKMARK [1][-]{section.14}{14 Improve AIRS to outperform R-WIN: CH-WIN}{}% 23
+\BOOKMARK [1][-]{section.15}{15 Window Priority Scheme in AIRS}{}% 24
+\BOOKMARK [1][-]{section.16}{16 AIRS Pitfall 1 : Windows may be too long/difficult}{}% 25
+\BOOKMARK [2][-]{subsection.16.1}{16.1 AIRS Pitfall 1 : Windows may be too long/difficult}{section.16}% 26
+\BOOKMARK [1][-]{section.17}{17 AIRS Pitfall 2 : Inappropriate Penalty Scheme}{}% 27
+\BOOKMARK [2][-]{subsection.17.1}{17.1 AIRS Pitfall 2 : Inappropriate Penalty Scheme}{section.17}% 28
+\BOOKMARK [1][-]{section.18}{18 AIRS Pitfall 3 : Overly Complicated â†’ Keep it simple}{}% 29
+\BOOKMARK [1][-]{section.19}{19 Result}{}% 30
+\BOOKMARK [1][-]{section.20}{20 Open Questions}{}% 31
+\BOOKMARK [1][-]{section.21}{21 Multiple Optimizers}{}% 32
+\BOOKMARK [2][-]{subsection.21.1}{21.1 Multiple Optimizers}{section.21}% 33
+\BOOKMARK [2][-]{subsection.21.2}{21.2 Iterating Polytime Optimizer}{section.21}% 34
+\BOOKMARK [1][-]{section.22}{22 Polytime + Search-based Result}{}% 35
+\BOOKMARK [1][-]{section.23}{23 Lessons Learned}{}% 36

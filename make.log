@@ -1,0 +1,24 @@
+make[1]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip' に入ります
+make[1]: 警告: 副次 make で -jN を強制指定しました: jobserver モードを無効にします.
+make -C img
+make -C css
+make[2]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip/css' に入ります
+sass --update .
+make[2]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip/img' に入ります
+make[2]: `all' に対して行うべき事はありません.
+make[2]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip/img' から出ます
+make -C scripts
+make[2]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip/scripts' に入ります
+make[2]: `all' に対して行うべき事はありません.
+make[2]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip/scripts' から出ます
+scripts/org-html.sh presen.org presen.org.html
+Loading /home/guicho/repos/presentations/2016-6-13-hsdip/scripts/compile-org-html.el (source)...
+make[2]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip/css' から出ます
+Loading vc-git...
+Warning: defvar ignored because org-agenda-archives-mode is let-bound
+Warning: defvar ignored because org-agenda-skip-comment-trees is let-bound
+Warning: defvar ignored because org-agenda-skip-function is let-bound
+Saving file /home/guicho/repos/presentations/2016-6-13-hsdip/presen.org.html...
+Wrote /home/guicho/repos/presentations/2016-6-13-hsdip/presen.org.html
+cp -f presen.org.html index.html
+make[1]: ディレクトリ `/home/guicho/repos/presentations/2016-6-13-hsdip' から出ます
